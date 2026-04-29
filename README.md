@@ -49,8 +49,8 @@ uv run fastapi dev main.py
 | 接口 | 方法 | 状态 |
 |------|------|------|
 | 注册 | POST /register | ✅ 已完成 |
-| 登录 | POST /login | ⏳ 待完成 |
-| 获取用户信息 | GET /info | ⏳ 待完成 |
+| 登录 | POST /login | ✅ 已完成 |
+| 获取用户信息 | GET /info | ✅ 已完成 |
 | 更新用户信息 | PUT /update | ⏳ 待完成 |
 | 修改密码 | PUT /password | ⏳ 待完成 |
 
