@@ -66,11 +66,11 @@ uv run fastapi dev main.py
 
 | 接口 | 方法 | 状态 |
 |------|------|------|
-| 检查收藏状态 | GET /check | ⏳ 待完成 |
-| 添加收藏 | POST /add | ⏳ 待完成 |
-| 取消收藏 | DELETE /remove | ⏳ 待完成 |
-| 收藏列表 | GET /list | ⏳ 待完成 |
-| 清空收藏 | DELETE /clear | ⏳ 待完成 |
+| 检查收藏状态 | GET /check | ✅ 已完成 |
+| 添加收藏 | POST /add | ✅ 已完成 |
+| 取消收藏 | DELETE /remove | ✅ 已完成 |
+| 收藏列表 | GET /list | ✅ 已完成 |
+| 清空收藏 | DELETE /clear | ✅ 已完成 |
 
 ### 浏览历史模块 `/api/history`
 
