@@ -29,3 +29,35 @@ async def authenticate_and_create_token(db: AsyncSession, username: str, passwor
     if not security.verify_password(password, user.password):
         return None
     return security.create_token({"sub": user.username})
+
+
+# 更新用户信息
+async def update_user(db: AsyncSession, username: str, update_data) -> User:
+    user = await get_user_by_username(db, username)
+    if not user:
+        return None
+
+    # 只更新提供的字段
+    update_dict = update_data.model_dump(exclude_unset=True)
+    for key, value in update_dict.items():
+        setattr(user, key, value)
+
+    await db.commit()
+    await db.refresh(user)
+    return user
+
+
+# 修改密码
+async def change_password(db: AsyncSession, username: str, old_password: str, new_password: str) -> bool:
+    user = await get_user_by_username(db, username)
+    if not user:
+        return False
+
+    # 验证旧密码
+    if not security.verify_password(old_password, user.password):
+        return False
+
+    # 更新密码
+    user.password = security.get_hash_password(new_password)
+    await db.commit()
+    return True
