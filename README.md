@@ -51,8 +51,8 @@ uv run fastapi dev main.py
 | 注册 | POST /register | ✅ 已完成 |
 | 登录 | POST /login | ✅ 已完成 |
 | 获取用户信息 | GET /info | ✅ 已完成 |
-| 更新用户信息 | PUT /update | ⏳ 待完成 |
-| 修改密码 | PUT /password | ⏳ 待完成 |
+| 更新用户信息 | PUT /update | ✅ 已完成 |
+| 修改密码 | PUT /password | ✅ 已完成 |
 
 ### 新闻模块 `/api/news`
 
