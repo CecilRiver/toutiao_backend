@@ -7,6 +7,7 @@
 - **Web 框架**: FastAPI 0.135+
 - **ORM**: SQLAlchemy 2.0 (异步模式)
 - **数据库**: MySQL (aiomysql)
+- **缓存**: Redis (redis-py 异步模式)
 - **认证**: JWT (PyJWT)
 - **密码加密**: Passlib + bcrypt
 
@@ -14,7 +15,8 @@
 
 ```
 toutiao_backend/
-├── config/         # 配置模块（数据库、settings）
+├── config/         # 配置模块（数据库、Redis、settings）
+├── cache/          # 缓存操作层
 ├── crud/           # 数据库操作层
 ├── models/         # ORM 模型
 ├── routers/        # API 路由
@@ -90,6 +92,26 @@ uv run fastapi dev main.py
 | DB_NAME | 数据库名 |
 | DB_USER | 数据库用户名 |
 | DB_PASSWORD | 数据库密码 |
+| REDIS_HOST | Redis 地址 |
+| REDIS_PORT | Redis 端口 |
+| REDIS_DB | Redis 数据库编号 (0-15) |
+| REDIS_PASSWORD | Redis 密码 |
 | SECRET_KEY | JWT 密钥 |
 | ALGORITHM | JWT 算法 (默认 HS256) |
 | ACCESS_TOKEN_EXPIRE_MINUTES | Token 过期时间 |
+
+## 缓存设计
+
+### 缓存策略
+
+采用 Redis 作为缓存层，缓存热点数据以减少数据库查询压力。
+
+| 数据类型 | 缓存 Key | 过期时间 | 说明 |
+|----------|----------|----------|------|
+| 新闻分类 | `news:categories` | 7200s (2h) | 分类数据稳定，缓存时间较长 |
+
+
+### 缓存模块
+
+- `config/cache_conf.py`: Redis 连接配置与基础缓存操作
+- `cache/news_cache.py`: 新闻相关缓存操作封装
